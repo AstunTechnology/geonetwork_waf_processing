@@ -62,7 +62,7 @@ class GeonetworkWAF():
 
         # set today's date in correct format for updating service and dataset xml files if needed
         now = datetime.datetime.now()
-        self.formattednow = now.strftime("%Y-%m-%dT%H:%M:%S")
+        self.formattednow = now.strftime("%Y-%m-%d")
 
     def fixTimeStamp(self, outputdir):
         ''' fixes timestamp on modified files so data.gov.uk doesn't reject them'''
@@ -121,7 +121,7 @@ class GeonetworkWAF():
                     # if it's the service doc then rename it and move on
                     for b in doc.find('./gmd:hierarchyLevel',namespaces):
                         if b.attrib['codeListValue'] == 'service':
-                            for m in doc.findall('.//gmd:MD_DigitalTransferOptions', namespaces):
+                            for m in doc.findall('./gmd:MD_DigitalTransferOptions', namespaces):
                                  for l in m.findall('./gmd:onLine', namespaces):
                                     for i in l.findall('./gmd:hierarchyLevel/gmd:description',namespaces):
                                         for j in i.findall('./gco:CharacterString'):
