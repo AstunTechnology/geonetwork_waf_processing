@@ -147,7 +147,8 @@ class GeonetworkWAF():
                                 for i in doc.iterfind('./gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title', namespaces):
                                     for n in i.findall('./gco:CharacterString', namespaces):
                                         d[os.path.dirname(os.path.dirname(name))] = n.text
-                                        shutil.move(tmpfile,os.path.join(outputdir, n.text + '.xml'))
+                                        # strip spaces
+                                        shutil.move(tmpfile,os.path.join(outputdir, n.text.replace(" ", "") + '.xml'))
                             except:
                                 e = sys.exc_info()[1]
                                 print "XML file naming error with %s: %s" % (name, e)
@@ -170,7 +171,7 @@ class GeonetworkWAF():
                             # remove invalid element
                             serviceID.remove(k)
                             # add new valid subelement
-                            etree.SubElement(serviceID, '{http://www.isotc211.org/2005/srv}operatesOn',{'{http://www.w3.org/1999/xlink}href':self.url + '/' + d[value] + '.xml'})
+                            etree.SubElement(serviceID, '{http://www.isotc211.org/2005/srv}operatesOn',{'{http://www.w3.org/1999/xlink}href':self.url + '/' + d[value].replace(" ", "") + '.xml'})
                         else:
                             print "Problem with coupled resource %s" % value
 
