@@ -1,6 +1,8 @@
-# Python utilities for working with Geonetwork (2.10)
+# Python utilities for working with Geonetwork (3.2.x)
 
 **geonetwork_waf.py**
+
+_Only works with Geonetwork 3.2.x, see 2.10.x branch for earlier version_
 
 Utility script to prep the metadata for use in the web-accessible folder method of harvesting on data.gov.uk. Takes a zip file of metadata as downloaded from geonetwork and extracts the relevant xml files into a single folder suitable for use as a web-accessible folder for use on data.gov.uk. Identifies the service record and names it service.xml, fixes the coupled record references within service.xml, and creates an index.html listing all the files, as required for harvesting. Only tested with metadata in Gemini 2.2 format, mileage with other schema may vary
 

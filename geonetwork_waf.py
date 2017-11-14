@@ -65,7 +65,7 @@ class GeonetworkWAF():
 
         # set today's date in correct format for updating xml files if needed
         now = datetime.datetime.now()
-        self.formattedtime = now.strftime("%Y-%m-%dT%H-%M-%S")
+        self.formattedtime = now.strftime("%Y-%m-%dT%H:%M:%S")
         self.formatteddate = now.strftime("%Y-%m-%d")
 
     def fixTimeStamp(self, outputdir):
