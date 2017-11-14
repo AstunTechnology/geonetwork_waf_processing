@@ -121,14 +121,20 @@ class GeonetworkWAF():
                     # if it's the service doc then rename it and move on
                     for b in doc.find('./gmd:hierarchyLevel',namespaces):
                         if b.attrib['codeListValue'] == 'service':
-                            for m in doc.findall('./gmd:MD_DigitalTransferOptions', namespaces):
-                                 for l in m.findall('./gmd:onLine', namespaces):
-                                    for i in l.findall('./gmd:hierarchyLevel/gmd:description',namespaces):
-                                        for j in i.findall('./gco:CharacterString'):
-                                            etree.SubElement(i, '{http://www.isotc211.org/2005/gco}CharacterString').text = 'INSPIRE Service GetCapabilties URL'
-                                            i.remove(j)
-                                            doc.write(tmpfile)
-                                    shutil.move(tmpfile,os.path.join(tmpdir,'temp_service.xml'))
+                            # for m in doc.findall('./gmd:MD_DigitalTransferOptions', namespaces):
+                            #      for l in m.findall('./gmd:onLine', namespaces):
+                            #         for i in l.findall('./gmd:hierarchyLevel/gmd:description',namespaces):
+                            #             for j in i.findall('./gco:CharacterString'):
+                            #                 etree.SubElement(i, '{http://www.isotc211.org/2005/gco}CharacterString').text = 'INSPIRE WMS'
+                            #                 i.remove(j)
+                                            # try:
+                                            #     doc.write(tmpfile)
+                                            #     print "Written tmp file"
+                                            # except:
+                                            #     e = sys.exc_info()[1]
+                                            #     print "XML file naming error with %s: %s" % (name, e)
+                                    #shutil.move(tmpfile,os.path.join(tmpdir,'temp_service.xml'))
+                            shutil.move(tmpfile,os.path.join(tmpdir,'temp_service.xml'))
                         else:
                             # use proper title as filename for URL
                             try:
