@@ -65,7 +65,8 @@ class GeonetworkWAF():
 
         # set today's date in correct format for updating xml files if needed
         now = datetime.datetime.now()
-        self.formattednow = now.strftime("%Y-%m-%d")
+        self.formattedtime = now.strftime("%Y-%m-%dT%H-%M-%S")
+        self.formatteddate = now.strftime("%Y-%m-%d")
 
     def fixTimeStamp(self, outputdir):
         ''' fixes timestamp on modified files so data.gov.uk doesn't reject
@@ -74,7 +75,10 @@ class GeonetworkWAF():
             for filename in glob.glob(os.path.join(outputdir, '*.xml')):
                 doc = etree.parse(filename)
                 for d in doc.find('.//{http://www.isotc211.org/2005/gmd}dateStamp'):
-                    d.text = self.formattednow
+                    if d.tag == "{http://www.isotc211.org/2005/gco}DateTime":
+                        d.text = self.formattedtime
+                    else:
+                        d.text = self.formatteddate
                     doc.write(filename)
         except:
             e = sys.exc_info()[1]
